@@ -1,26 +1,4 @@
-/**
- Створіть Java програму, яка виконує наступні завдання, використовуючи одновимірний масив:
 
- Створіть масив цілих чисел з 15 елементами.
- Заповніть масив випадковими цілими числами в діапазоні від 1 до 100.
- Виведіть початковий вигляд масиву.
- Відсортуйте масив за допомогою алгоритму сортування вставкою (Insertion Sort) в порядку зростання.
- Виведіть відсортований масив.
- Попросіть користувача ввести число для пошуку в масиві.
- Використовуючи алгоритм бінарного пошуку, знайдіть і виведіть індекс введеного користувачем числа
- у відсортованому масиві або повідомте, якщо числа немає.
- Залийте виконаний проект на свій GitHub репозиторій, посилання на який зазначте в LMS.
-
- Приклад:
-
- Початковий вигляд масиву: [45, 32, 78, 12, 88, 2, 65, 34, 98, 7, 55, 23, 67, 41, 91]
-
- Відсортований масив: [2, 7, 12, 23, 32, 34, 41, 45, 55, 65, 67, 78, 88, 91, 98]
-
- Введіть число для пошуку: 34 Індекс числа 34 у відсортованому масиві: 5
- */
-///TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 void main() {
     int[] arrayOfRandomNumbers = new Random().ints(15, 1, 101).toArray();
     IO.println("basic Array = " + java.util.Arrays.toString(arrayOfRandomNumbers));
@@ -38,5 +16,27 @@ void main() {
         arrayOfRandomNumbers[j+1]=current;
     }
     IO.println("sorted Array = " + java.util.Arrays.toString(arrayOfRandomNumbers));
+    Scanner scanner = new Scanner(System.in); // Create a Scanner object
+    System.out.print("Please add number which index you want to find: ");
+    int targetNumber = scanner.nextInt();
+    int targetIndex = 0;
+    int lowIndex = 0;
+    int highIndex = arrayOfRandomNumbers.length-1;
+       while (lowIndex <= highIndex){
+           int middleIndex = lowIndex + (highIndex - lowIndex) / 2;
+           if(targetNumber == arrayOfRandomNumbers[middleIndex]){
+                   targetIndex = middleIndex;
+                   IO.println("index  of = " + targetNumber+" is "+targetIndex);
+           break;
+           }
 
+           if(targetNumber > arrayOfRandomNumbers[middleIndex]){
+                      lowIndex = middleIndex+1;
+                   }else if(targetNumber < arrayOfRandomNumbers[middleIndex]){
+                      highIndex = middleIndex-1;
+                   };
+       }
+    if(lowIndex > highIndex ){
+        IO.println("there is no " + targetNumber+" in this array");
+    }
 }
